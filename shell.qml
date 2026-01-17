@@ -16,9 +16,23 @@ ShellRoot {
 	onErrorOccurred: function(error) {
 	    console.error("Niri error:", error)}}
 
-    LazyLoader {active: true;   component: LeftBar{}}
-    LazyLoader{ active: true;    component: CenterBar{ }}
-    LazyLoader{ active: true;   component: RightBar{}}
+    Variants {
+	model: Quickshell.screens.filter(s => s.model == "VG270U P" || s.name == "eDP-1");
+    
+	delegate: Component {
+
+	    Item {
+
+		    required property var modelData
+
+
+		LazyLoader {active: true;   component: LeftBar{ screen: modelData}}
+		LazyLoader{ active: true;    component: CenterBar{ screen: modelData }}
+		LazyLoader{ active: true;   component: RightBar{screen: modelData }}
+	    }
+	}
+    }
+	
 
     LazyLoader {active: false; component: PanelWindow {
 		id: testing
